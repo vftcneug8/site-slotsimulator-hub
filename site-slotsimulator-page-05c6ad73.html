@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>老虎机模拟器 · 功能介绍与典型场景</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f6f8fc;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+
+    /* 深色头图区 */
+    .hero {
+      background: linear-gradient(145deg, #0b1a2e 0%, #1a2f44 100%);
+      padding: 3.5rem 1.5rem 4rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      color: #f1f5f9;
+      font-size: 2.4rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero .sub {
+      color: #b4c8dd;
+      font-size: 1.15rem;
+      max-width: 680px;
+      margin: 0 auto 2rem;
+    }
+
+    /* 导航条 (位于深色区) */
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      padding: 0.8rem 0 0;
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+
+    .nav-links li a {
+      color: #d0e0f2;
+      font-weight: 500;
+      padding: 0.3rem 0.2rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .nav-links li a:hover {
+      color: #ffffff;
+      border-bottom-color: #60a5fa;
+      text-decoration: none;
+    }
+
+    /* 浅色正文容器 */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 3.5rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+    }
+
+    .section-sub {
+      color: #475569;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      border-left: 3px solid #3b82f6;
+      padding-left: 1rem;
+    }
+
+    /* 介绍块 */
+    .intro {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem 2.2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+
+    .intro p {
+      margin-bottom: 1.2rem;
+    }
+
+    /* 三个场景卡片网格 */
+    .scene-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin: 2.2rem 0 2rem;
+    }
+
+    .scene-card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.8rem 1.6rem 2rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s, transform 0.2s;
+      border: 1px solid #edf2f7;
+    }
+
+    .scene-card:hover {
+      box-shadow: 0 12px 32px rgba(37, 99, 235, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .scene-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #0f172a;
+    }
+
+    .scene-card p {
+      font-size: 0.97rem;
+      color: #334155;
+    }
+
+    /* 常见说明 (FAQ 风格) */
+    .faq-block {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem 2.2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      margin-top: 2.2rem;
+    }
+
+    .faq-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid #e9edf3;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-item strong {
+      display: block;
+      font-weight: 600;
+      color: #0b1a2e;
+      margin-bottom: 0.3rem;
+      font-size: 1.05rem;
+    }
+
+    .faq-item span {
+      color: #334155;
+      font-size: 0.98rem;
+    }
+
+    /* 提示条 */
+    .tip-note {
+      background: #eef5ff;
+      border-left: 4px solid #2563eb;
+      padding: 1rem 1.5rem;
+      border-radius: 0 12px 12px 0;
+      margin: 2rem 0 1.5rem;
+      font-size: 0.95rem;
+      color: #1e293b;
+    }
+
+    .tip-note a {
+      font-weight: 600;
+    }
+
+    /* 底部 */
+    .footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #64748b;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 1.5rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.8rem; }
+      .hero .sub { font-size: 1rem; }
+      .nav-links { gap: 1.2rem; }
+      .section-title { font-size: 1.35rem; }
+      .intro, .faq-block { padding: 1.5rem; }
+      .scene-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 深色头图 + 导航 -->
+  <header class="hero">
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#intro">介绍</a></li>
+        <li><a href="#scenes">使用场景</a></li>
+        <li><a href="#faq">常见说明</a></li>
+        <li><a href="https://site-slotsimulator.com">老虎机模拟器</a></li>
+      </ul>
+    </nav>
+    <h1>老虎机模拟器 · 场景与机制简述</h1>
+    <p class="sub">一套轻量的桌面与移动端交互工具，帮助理解转盘逻辑、赔付规则与随机表现。</p>
+  </header>
+
+  <!-- 浅色正文区 -->
+  <main class="container">
+
+    <!-- 核心介绍 -->
+    <section id="intro">
+      <div class="intro">
+        <h2 class="section-title">它是什么</h2>
+        <p>
+          <strong>老虎机模拟器</strong> 是一个基于概率的交互演示工具，并非真实赌博游戏。它通过虚拟转盘、符号组合与赔付线，展示经典老虎机的运行逻辑。用户可以调整参数（如符号权重、卷轴数量），观察不同设置对结果分布的直接影响。
+        </p>
+        <p>
+          这个工具适合教学演示、概率实验以及游戏机制分析。你可以在 <a href="https://site-slotsimulator.com">老虎机模拟器</a> 页面中自由调整配置，并实时查看旋转结果与统计汇总。所有运算都在本地执行，不涉及真实货币或投注。
+        </p>
+        <p>
+          和许多线上模拟不同，它刻意去掉了积分、奖励动画等诱导性元素，更专注于数据反馈——每轮旋转后显示符号频率、赔付线命中率以及期望值变化。
+        </p>
+      </div>
+    </section>
+
+    <!-- 三个场景模块 -->
+    <section id="scenes">
+      <h2 class="section-title">典型使用场景</h2>
+      <p class="section-sub">从教学到测试，不同角色可以从中获得有价值的参考。</p>
+
+      <div class="scene-grid">
+        <div class="scene-card">
+          <h3>📊 概率与统计课堂</h3>
+          <p>
+            教师利用模拟器展示独立随机事件与组合概率。学生可以修改每个符号的出现权重，运行数百次旋转后对比理论概率与实验频率。赔付线结构也让“条件概率”的讲解变得更直观。
+          </p>
+        </div>
+        <div class="scene-card">
+          <h3>🎮 游戏机制设计验证</h3>
+          <p>
+            独立开发者或策划在早期阶段快速验证老虎机核心循环：卷轴数量、赔付表与方差。通过调整参数并观察命中分布，能在不编写完整客户端的情况下测试不同配置的“手感”与波动。
+          </p>
+        </div>
+        <div class="scene-card">
+          <h3>🧪 随机性认知练习</h3>
+          <p>
+            对于希望理解“赌徒谬误”或“小数定律”的普通用户，模拟器提供了安全的实验环境。连续旋转后查看结果序列，可以直观感受到短期波动与长期期望的区别，避免对随机事件产生错误信念。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 提示条 -->
+    <div class="tip-note">
+      💡 <strong>建议</strong>：开始使用前先阅读内置的赔付线说明与符号权重预设。如果你对某组配置的长期表现好奇，可以连续运行 1000 次旋转并导出统计数据。<a href="https://site-slotsimulator.com">老虎机模拟器</a> 的统计面板会清晰呈现每次调整带来的变化。
+    </div>
+
+    <!-- 常见说明（FAQ 摘要） -->
+    <section id="faq">
+      <div class="faq-block">
+        <h2 class="section-title" style="margin-top: 0;">常见说明</h2>
+
+        <div class="faq-item">
+          <strong>这个模拟器需要注册或付费吗？</strong>
+          <span>不需要。它是完全免费的网页工具，没有用户系统，也不会收集个人数据。打开即可使用全部功能。</span>
+        </div>
+
+        <div class="faq-item">
+          <strong>我能否调整符号出现概率？</strong>
+          <span>可以。在参数面板中，每个符号都有一个权重滑块，权重越高相对出现频率越大。调整后所有后续旋转都会基于新概率生成。</span>
+        </div>
+
+        <div class="faq-item">
+          <strong>模拟结果和真实老虎机一致吗？</strong>
+          <span>从数学原理来看，它模拟了经典的多卷轴独立随机过程。但真实赌场设备还有机械噪声、伪随机算法与法定RTP要求，因此本工具仅供学习参考，不应作为实际投注依据。</span>
+        </div>
+
+        <div class="faq-item">
+          <strong>移动端可以正常使用吗？</strong>
+          <span>界面针对手机与平板做了自适应布局，触摸操作也经过优化。所有交互按钮、滑块与统计图表在移动浏览器上均可流畅使用。</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>仅用于学习与演示 · 不涉及真实货币 · 理性看待随机性</p>
+    <p style="margin-top: 0.3rem;"><a href="https://site-slotsimulator.com">老虎机模拟器</a> — 了解机制，而非沉迷结果</p>
+  </footer>
+
+</body>
+</html>
